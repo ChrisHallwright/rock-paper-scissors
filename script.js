@@ -4,4 +4,9 @@ function getComputerChoice() {
     return options[Math.floor(Math.random(3) * 3)];
 }
 
-console.log(getComputerChoice());
+function getHumanChoice() {
+    let choice = prompt('Enter your choice');
+    return choice.toLowerCase();
+}
+
+console.log(getHumanChoice());
