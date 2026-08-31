@@ -30,7 +30,26 @@ function playRound(humanChoice, computerChoice) {
     console.log(msg);
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+function playGame() {
+    let humanSelection;
+    let computerSelection;
+    for (let i = 0; i < 5; i++) {
+        humanSelection = getHumanChoice();
+        computerSelection = getComputerChoice();
 
-playRound(humanSelection, computerSelection);
+        playRound(humanSelection, computerSelection);
+    }
+
+    console.log(`Your score: ${humanScore}; Computer's score: ${computerScore}`);
+    let msg;
+    if (humanScore > computerScore) {
+        msg = 'WINNER!!!!';
+    } else if (computerScore > humanScore) {
+        msg = 'Bummer :(';
+    } else {
+        msg = "ho hum...";
+    }
+    console.log(msg);
+}
+
+playGame();
