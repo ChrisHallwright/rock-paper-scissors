@@ -4,15 +4,12 @@ function getComputerChoice() {
     return options[Math.floor(Math.random(3) * 3)];
 }
 
-function getHumanChoice() {
-    let choice = prompt('Enter your choice');
-    return choice.toLowerCase();
-}
-
 let humanScore = 0;
 let computerScore = 0;
 
-function playRound(humanChoice, computerChoice) {
+function playRound(humanChoice) {
+    let computerChoice = getComputerChoice();
+
     let msg;
     if (humanChoice === 'rock' && computerChoice == 'paper'
         || humanChoice === 'paper' && computerChoice == 'scissors'
@@ -33,13 +30,12 @@ function playRound(humanChoice, computerChoice) {
 function playGame() {
     let humanSelection;
     let computerSelection;
-    for (let i = 0; i < 5; i++) {
-        humanSelection = getHumanChoice();
-        computerSelection = getComputerChoice();
 
-        playRound(humanSelection, computerSelection);
-    }
-
+    let btns = document.querySelectorAll('button');
+    btns.forEach((el) => el.addEventListener('click',
+        (e) => playRound(e.target.textContent.toLowerCase())
+    ))
+/*
     console.log(`Your score: ${humanScore}; Computer's score: ${computerScore}`);
     let msg;
     if (humanScore > computerScore) {
@@ -50,6 +46,7 @@ function playGame() {
         msg = "ho hum...";
     }
     console.log(msg);
+    */
 }
 
 playGame();
