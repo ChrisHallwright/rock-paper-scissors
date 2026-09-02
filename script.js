@@ -7,6 +7,19 @@ function getComputerChoice() {
 let humanScore = 0;
 let computerScore = 0;
 
+const results = document.querySelector('.results');
+const runningScores = document.querySelector('.running-scores');
+
+function displayScores() {
+   runningScores.textContent = `Your score: ${humanScore}; Computer's score: ${computerScore}`;
+}
+displayScores();
+
+let btns = document.querySelectorAll('button');
+btns.forEach((el) => el.addEventListener('click',
+    (e) => playRound(e.target.textContent.toLowerCase())
+))
+
 function playRound(humanChoice) {
     let computerChoice = getComputerChoice();
 
@@ -24,29 +37,32 @@ function playRound(humanChoice) {
     } else {
         msg = `Draw - computer also chose ${computerChoice}`;
     }
-    console.log(msg);
-}
+    let p = document.createElement('p');
+    p.textContent = msg;
+    results.appendChild(p);
 
-function playGame() {
-    let humanSelection;
-    let computerSelection;
-
-    let btns = document.querySelectorAll('button');
-    btns.forEach((el) => el.addEventListener('click',
-        (e) => playRound(e.target.textContent.toLowerCase())
-    ))
-/*
-    console.log(`Your score: ${humanScore}; Computer's score: ${computerScore}`);
-    let msg;
-    if (humanScore > computerScore) {
-        msg = 'WINNER!!!!';
-    } else if (computerScore > humanScore) {
-        msg = 'Bummer :(';
-    } else {
-        msg = "ho hum...";
+    displayScores();
+    if (humanScore == 5 || computerScore === 5) {
+        displayFinalAndReset();
     }
-    console.log(msg);
-    */
 }
 
-playGame();
+function displayFinalAndReset() {
+
+    let msg;
+    if (humanScore === 5) {
+        msg = '  -  WINNER!!!!';
+    } else {
+        msg = '  -  Bummer :(';
+    }
+    txt = document.createTextNode(msg);
+    runningScores.appendChild(txt);
+
+    humanScore = 0;
+    computerScore = 0;
+
+    document.querySelectorAll('.results>p').forEach(
+        p => p.parentElement.removeChild(p));
+
+}
+
